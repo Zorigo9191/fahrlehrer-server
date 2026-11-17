@@ -62,13 +62,7 @@ export class OfficeInstructorAccountService {
     return data;
   }
 
-  findAll() {
-    return `This action returns all officeInstructorAccount`;
-  }
 
-  findOne(id: number) {
-    return `This action returns a #${id} officeInstructorAccount`;
-  }
 
   async update(instructorId: string, dto: UpdateOfficeInstructorAccountDto) {
     const { data: updatedInstructor, error: updateError } = await this.supabase

@@ -12,9 +12,7 @@ import { SupabaseClient } from '@supabase/supabase-js';
 export class StudentFeedbacksService {
   constructor(@Inject(SUPABASE) private readonly supabase: SupabaseClient) {}
 
-  create(dto: CreateStudentFeedbackDto) {
-    return 'This action adds a new studentFeedback';
-  }
+ 
 
   async findAll(userId: string, role: string) {
     const column = role === 'instructor' ? 'instructor_id' : 'student_id';
@@ -28,15 +26,5 @@ export class StudentFeedbacksService {
     return data;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} studentFeedback`;
-  }
 
-  update(id: number, dto: UpdateStudentFeedbackDto) {
-    return `This action updates a #${id} studentFeedback`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} studentFeedback`;
-  }
 }

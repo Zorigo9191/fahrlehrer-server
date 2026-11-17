@@ -30,9 +30,7 @@ export class InstructorAcceptedlessonByStudentService {
     return data;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} instructorAcceptedlessonByStudent`;
-  }
+
 
   async update(
     lessonId: number,
@@ -58,5 +56,5 @@ export class InstructorAcceptedlessonByStudentService {
     return lesson;
   }
 
-  remove(id: number, instructorId: string) {}
+
 }
