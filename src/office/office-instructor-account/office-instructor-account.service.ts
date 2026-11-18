@@ -19,7 +19,7 @@ export class OfficeInstructorAccountService {
       await this.supabase.auth.admin.createUser({
         email: dto.email,
         password: dto.password,
-        email_confirm: false,
+        email_confirm: true,
         user_metadata: {
           first_name: dto.first_name,
           last_name: dto.last_name,
