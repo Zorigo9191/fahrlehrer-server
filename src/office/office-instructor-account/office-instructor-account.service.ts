@@ -24,9 +24,8 @@ export class OfficeInstructorAccountService {
           first_name: dto.first_name,
           last_name: dto.last_name,
           phone_number: dto.phone_number,
+          role: 'instructor',
         },
-
-        app_metadata: { role: 'instructor' },
       });
 
     if (authError) {
@@ -40,6 +39,15 @@ export class OfficeInstructorAccountService {
 
     // 2. Profil in instructors speichern
 
+    const { error: profileError } = await this.supabase
+      .from('profiles')
+      .upsert({ id: userId, role: 'instructor' }, { onConflict: 'id' });
+
+    if (profileError) {
+      await this.supabase.auth.admin.deleteUser(userId);
+      throw new InternalServerErrorException(profileError.message);
+    }
+
     const { data, error } = await this.supabase
       .from('instructors')
       .insert({
@@ -49,7 +57,6 @@ export class OfficeInstructorAccountService {
         phone_number: dto.phone_number,
         teaching_classes: dto.teaching_classes,
         student_count: 0,
-        role: 'instructor',
       })
       .select()
       .single();
@@ -61,8 +68,6 @@ export class OfficeInstructorAccountService {
 
     return data;
   }
-
-
 
   async update(instructorId: string, dto: UpdateOfficeInstructorAccountDto) {
     const { data: updatedInstructor, error: updateError } = await this.supabase
